@@ -95,6 +95,9 @@
           <li>
             <a href='#join'>join</a>
           </li>
+          <li>
+            <a href='#zip'>zip</a>
+          </li>
         </ul>
         <h3>Table Functions</h3>
         <ul>
@@ -260,7 +263,7 @@
             <code>_.invoke(foo, blah)</code>
           </p>
           <p class='description'>Calls a function with specified name on each item using the colon operator.</p>
-          <pre class='example'>Person = {}&#x000A;Person.__index = Person &#x000A;function Person:new(name) &#x000A;  return setmetatable({ name=name }, self) &#x000A;end &#x000A;function Person:print() &#x000A;  print(self.name) &#x000A;end &#x000A;_.invoke({ Person:new("Tom"), Person:new("Dick"), Person:new("Harry") }, "print") &#x000A;=> Calls person:print() on each Person</pre>
+          <pre class='example'>Person = {}&#x000A;Person.__index = Person&#x000A;function Person:new(name)&#x000A;  return setmetatable({ name=name }, self)&#x000A;end&#x000A;function Person:print()&#x000A;  print(self.name)&#x000A;end&#x000A;_.invoke({ Person:new("Tom"), Person:new("Dick"), Person:new("Harry") }, "print")&#x000A;=> Calls person:print() on each Person</pre>
         </div>
         <div class='function' id='pluck'>
           <p>
@@ -268,7 +271,7 @@
             <code>_.pluck(iter, property_name)</code>
           </p>
           <p class='description'>An convenient version of the common use-case of mapextracting a list of properties.</p>
-          <pre class='example'>_.pluck({ {id=1}, {id=2}, {id=3} }, 'id') &#x000A;=> { 1, 2, 3 }</pre>
+          <pre class='example'>_.pluck({ {id=1}, {id=2}, {id=3} }, 'id')&#x000A;=> { 1, 2, 3 }</pre>
         </div>
         <div class='function' id='reduce'>
           <p>
@@ -288,7 +291,7 @@
             <code>_.max(iter, [func])</code>
           </p>
           <p class='description'>Returns the item with the largest value. If a func is provided it will be used on each value to generate the criterion by which the value is ranked.</p>
-          <pre class='example'>_.max({1,2,3,4}) &#x000A;=> 4&#x000A;_.max({ {age=15}, {age=12}, {age=19} }, function(p) return p.age end) &#x000A;=> {age=19}</pre>
+          <pre class='example'>_.max({1,2,3,4})&#x000A;=> 4&#x000A;_.max({ {age=15}, {age=12}, {age=19} }, function(p) return p.age end)&#x000A;=> {age=19}</pre>
         </div>
         <div class='function' id='min'>
           <p>
@@ -296,7 +299,7 @@
             <code>_.min(iter, [func])</code>
           </p>
           <p class='description'>Returns the item with the smallest value. If a func is provided it will be used on each value to generate the criterion by which the value is ranked.</p>
-          <pre class='example'>_.max({1,2,3,4}) &#x000A;=> 1&#x000A;_.max({ {age=15}, {age=12}, {age=19} }, function(p) return p.age end) &#x000A;=> {age=12}</pre>
+          <pre class='example'>_.max({1,2,3,4})&#x000A;=> 1&#x000A;_.max({ {age=15}, {age=12}, {age=19} }, function(p) return p.age end)&#x000A;=> {age=12}</pre>
         </div>
         <div class='function' id='include'>
           <p>
@@ -324,7 +327,7 @@
             </span>
           </p>
           <p class='description'>Returns true if func(item) returns true for all item in items.</p>
-          <pre class='example'>_.all({2,4,8}, function(i) return i%2 == 0 end)        &#x000A;=> true&#x000A;_.all({1,2,3,4}, function(i) return i%2 == 0 end)        &#x000A;=> false</pre>
+          <pre class='example'>_.all({2,4,8}, function(i) return i%2 == 0 end)&#x000A;=> true&#x000A;_.all({1,2,3,4}, function(i) return i%2 == 0 end)&#x000A;=> false</pre>
         </div>
         <div class='function' id='any'>
           <p>
@@ -336,7 +339,7 @@
             </span>
           </p>
           <p class='description'>Returns true if func(item) returns true for any item in items.</p>
-          <pre class='example'>_.any({1,2,3,4}, function(i) return i%2 == 0 end)        &#x000A;=> true&#x000A;_.any({1,3,5}, function(i) return i%2 == 0 end)        &#x000A;=> false</pre>
+          <pre class='example'>_.any({1,2,3,4}, function(i) return i%2 == 0 end)&#x000A;=> true&#x000A;_.any({1,3,5}, function(i) return i%2 == 0 end)&#x000A;=> false</pre>
         </div>
         <div class='function' id='to_array'>
           <p>
@@ -344,7 +347,7 @@
             <code>_.to_array(iter)</code>
           </p>
           <p class='description'>Collects all values into a new array.</p>
-          <pre class='example'>_.to_array(string.gmatch("dog cat goat", "%S+")) &#x000A;=> { "dog", "cat", "goat" }</pre>
+          <pre class='example'>_.to_array(string.gmatch("dog cat goat", "%S+"))&#x000A;=> { "dog", "cat", "goat" }</pre>
         </div>
         <div class='function' id='sort'>
           <p>
@@ -352,7 +355,7 @@
             <code>_.sort(iter, [comparison_func])</code>
           </p>
           <p class='description'>Returns an array with all elements sorted by the comparison function, by default it uses the < operator. If an array is passed in it will sort the elements in place and not create a new array.</p>
-          <pre class='example'>_.sort({ 3, 1, 2}) &#x000A;=> { 1, 2, 3 }</pre>
+          <pre class='example'>_.sort({ 3, 1, 2})&#x000A;=> { 1, 2, 3 }</pre>
         </div>
         <div class='function' id='reverse'>
           <p>
@@ -360,7 +363,7 @@
             <code>_.reverse(iter, [comparison_func])</code>
           </p>
           <p class='description'>Iterates over all the items and returns a new array with the items in reverse order.</p>
-          <pre class='example'>_.reverse({ 1, 2, 3}) &#x000A;=> { 3, 2, 1 }</pre>
+          <pre class='example'>_.reverse({ 1, 2, 3})&#x000A;=> { 3, 2, 1 }</pre>
         </div>
         <h3>Array Functions</h3>
         <div class='function' id='flatten'>
@@ -369,7 +372,7 @@
             <code>_.flatten(array)</code>
           </p>
           <p class='description'>Flattens a nested array (the nesting can be to any depth).</p>
-          <pre class='example'>_.flatten({1, {2}, {3, {{{4}}}}}) &#x000A;=> { 1, 2, 3, 4 }</pre>
+          <pre class='example'>_.flatten({1, {2}, {3, {{{4}}}}})&#x000A;=> { 1, 2, 3, 4 }</pre>
         </div>
         <div class='function' id='first'>
           <p>
@@ -381,7 +384,7 @@
             </span>
           </p>
           <p class='description'>Returns the first element of an array. Optionally it will return an array of the first n items.</p>
-          <pre class='example'>_.first({1,2,3}) &#x000A;=> 1&#x000A;_.first({1,2,3}, 2) &#x000A;=> {1,2,}</pre>
+          <pre class='example'>_.first({1,2,3})&#x000A;=> 1&#x000A;_.first({1,2,3}, 2)&#x000A;=> {1,2,}</pre>
         </div>
         <div class='function' id='rest'>
           <p>
@@ -393,7 +396,7 @@
             </span>
           </p>
           <p class='description'>Returns an array of all items except the first. Optionally it will start at start_index.</p>
-          <pre class='example'>_.rest({1,2,3}) &#x000A;=> {2,3} &#x000A;_.rest({1,2,3}, 2) &#x000A;=> {3}</pre>
+          <pre class='example'>_.rest({1,2,3})&#x000A;=> {2,3}&#x000A;_.rest({1,2,3}, 2)&#x000A;=> {3}</pre>
         </div>
         <div class='function' id='slice'>
           <p>
@@ -401,7 +404,7 @@
             <code>_.slice(array, start_index, length)</code>
           </p>
           <p class='description'>Returns a section of an array starting with start_index of length items length.</p>
-          <pre class='example'>_.slice({ 1, 2, 3, 4, 5 }, 2, 3) &#x000A;=> { 2, 3, 4 }</pre>
+          <pre class='example'>_.slice({ 1, 2, 3, 4, 5 }, 2, 3)&#x000A;=> { 2, 3, 4 }</pre>
         </div>
         <div class='function' id='push'>
           <p>
@@ -443,6 +446,14 @@
           <p class='description'>Returns a string with all items in the array concatenated together with an optional separator.</p>
           <pre class='example'>_.join({'c','a','t'})&#x000A;=> "cat"&#x000A;_.join({'c','a','t'}, '/')&#x000A;=> "c/a/t"</pre>
         </div>
+        <div class='function' id='zip'>
+          <p>
+            <strong class='name'>zip</strong>
+            <code>_.zip(array)</code>
+          </p>
+          <p class='description'>Returns an array where the nth item is an array containing the nth items of the arguments.</p>
+          <pre class='example'>_.zip({1,2,3}, {3,4,5})&#x000A;=> {{1,3}, {2,4}, {3,5}}</pre>
+        </div>
         <h3>Table Functions</h3>
         <div class='function' id='extend'>
           <p>
@@ -450,7 +461,7 @@
             <code>_.extend(destination, source)</code>
           </p>
           <p class='description'>Copy all of the properties in the source object over to the destination object.</p>
-          <pre class='example'>_.extend({ name = 'moe' }, { age = 50 }) &#x000A;=> { name = 'moe', age = 50 }</pre>
+          <pre class='example'>_.extend({ name = 'moe' }, { age = 50 })&#x000A;=> { name = 'moe', age = 50 }</pre>
         </div>
         <div class='function' id='keys'>
           <p>
@@ -474,7 +485,7 @@
             <code>_.is_empty(object)</code>
           </p>
           <p class='description'>Returns true if object contains no values.</p>
-          <pre class='example'>_.is_empty({}) &#x000A;=> true &#x000A;-.is_empty({ name = "moe" }) &#x000A;=> false</pre>
+          <pre class='example'>_.is_empty({})&#x000A;=> true&#x000A;-.is_empty({ name = "moe" })&#x000A;=> false</pre>
         </div>
         <h3>Function Functions</h3>
         <div class='function' id='curry'>
@@ -491,7 +502,7 @@
             <code>_.wrap(func, wrapper)</code>
           </p>
           <p class='description'>Wraps the first function inside of the wrapper function, passing it as the first argument. This allows the wrapper to execute code before and after the function runs, adjust the arguments, and execute it conditionally.</p>
-          <pre class='example'>hello = function(name) &#x000A;  return "hello: "..name &#x000A;end &#x000A;hello = _.wrap(hello, function(func, ...) &#x000A;  return "before, "..func(...)..", after" &#x000A;end) &#x000A;hello('moe') &#x000A;=> before, hello: moe, after</pre>
+          <pre class='example'>hello = function(name)&#x000A;  return "hello: "..name&#x000A;end&#x000A;hello = _.wrap(hello, function(func, ...)&#x000A;  return "before, "..func(...)..", after"&#x000A;end)&#x000A;hello('moe')&#x000A;=> before, hello: moe, after</pre>
         </div>
         <div class='function' id='compose'>
           <p>
@@ -499,7 +510,7 @@
             <code>_.compose(func1, func2, [...])</code>
           </p>
           <p class='description'>Returns the composition of a list of functions, where each function consumes the return value of the function that follows. In math terms, composing the functions f(), g(), and h() produces f(g(h())).</p>
-          <pre class='example'>greet = function(name) &#x000A;  return "hi: "..name &#x000A;end &#x000A;exclaim = function(statement) &#x000A;  return statement.."!" &#x000A;end &#x000A;welcome = _.compose(print, greet, exclaim) &#x000A;welcome('moe') &#x000A;=> hi: moe!</pre>
+          <pre class='example'>greet = function(name)&#x000A;  return "hi: "..name&#x000A;end&#x000A;exclaim = function(statement)&#x000A;  return statement.."!"&#x000A;end&#x000A;welcome = _.compose(print, greet, exclaim)&#x000A;welcome('moe')&#x000A;=> hi: moe!</pre>
         </div>
         <h3>Utility Functions</h3>
         <div class='function' id='functions'>
@@ -508,7 +519,7 @@
             <code>_.functions()</code>
           </p>
           <p class='description'>Returns a list of function names in this library.</p>
-          <pre class='example'>_.functions() &#x000A;=> { 'each', 'map', 'reduce', ... }</pre>
+          <pre class='example'>_.functions()&#x000A;=> { 'each', 'map', 'reduce', ... }</pre>
         </div>
         <div class='function' id='identity'>
           <p>
@@ -516,7 +527,7 @@
             <code>_.identity(v)</code>
           </p>
           <p class='description'>Identity function, simply returns whatever is passed in. This function looks useless, but is used within Underscore as a default function.</p>
-          <pre class='example'>_.identity("foo") &#x000A;=> "foo"</pre>
+          <pre class='example'>_.identity("foo")&#x000A;=> "foo"</pre>
         </div>
         <div class='function' id='iter'>
           <p>

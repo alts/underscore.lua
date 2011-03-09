@@ -1,11 +1,11 @@
 iterator_functions:
   pretty: Iterator Functions
-  functions:  
+  functions:
     - name:
         map
       aliases:
         - collect
-      params: 
+      params:
         iter, func
       description:
         Produces a new array by mapping each value in iter through a transformation function.
@@ -13,11 +13,11 @@ iterator_functions:
         _.map({1,2,3}, function(i) return i*2 end)
         => { 2,4,6 }
 
-    - name: 
+    - name:
         each
       aliases:
         - for_each
-      params: 
+      params:
         iter, func
       description:
         Passes each value to function(i) and returns the input.
@@ -25,11 +25,11 @@ iterator_functions:
         _.each({1,2,3}, print)
         => {1,2,3}
 
-    - name: 
+    - name:
         select
       aliases:
-        - filter        
-      params: 
+        - filter
+      params:
         iter, func
       description:
         Removes items that do not match the provided criteria.
@@ -37,9 +37,9 @@ iterator_functions:
         _.select({1,2,3}, function(i) return i%2 == 1 end)
         => {1,3}
 
-    - name: 
+    - name:
         reject
-      params: 
+      params:
         iter, func
       description:
         Removes items that match the provided criteria.
@@ -47,40 +47,40 @@ iterator_functions:
         _.reject({1,2,3}, function(i) return i%2 == 1 end)
         => {2}
 
-    - name: 
+    - name:
         invoke
-      params: 
+      params:
         foo, blah
       description:
         Calls a function with specified name on each item using the colon operator.
       example: |
         Person = {}
-        Person.__index = Person 
-        function Person:new(name) 
-          return setmetatable({ name=name }, self) 
-        end 
-        function Person:print() 
-          print(self.name) 
-        end 
-        _.invoke({ Person:new("Tom"), Person:new("Dick"), Person:new("Harry") }, "print") 
+        Person.__index = Person
+        function Person:new(name)
+          return setmetatable({ name=name }, self)
+        end
+        function Person:print()
+          print(self.name)
+        end
+        _.invoke({ Person:new("Tom"), Person:new("Dick"), Person:new("Harry") }, "print")
         => Calls person:print() on each Person
 
-    - name: 
+    - name:
         pluck
-      params: 
+      params:
         iter, property_name
       description:
         An convenient version of the common use-case of map: extracting a list of properties.
       example: |
-        _.pluck({ {id=1}, {id=2}, {id=3} }, 'id') 
+        _.pluck({ {id=1}, {id=2}, {id=3} }, 'id')
         => { 1, 2, 3 }
 
-    - name: 
+    - name:
         reduce
       aliases:
         - inject
         - foldl
-      params: 
+      params:
         iter, memo, func
       description:
         Boils down a list of values into a single value. Memo is the initial state of the reduction, and each successive step of it should be returned by func.
@@ -88,33 +88,33 @@ iterator_functions:
         _.reduce({1,2,3}, 0, function(memo, i) return memo+i end)
         => 6
 
-    - name: 
+    - name:
         max
-      params: 
+      params:
         iter, [func]
       description: |
-        Returns the item with the largest value. If a func is provided it will be used on each value to generate the criterion by which the value is ranked.        
+        Returns the item with the largest value. If a func is provided it will be used on each value to generate the criterion by which the value is ranked.
       example: |
-        _.max({1,2,3,4}) 
+        _.max({1,2,3,4})
         => 4
-        _.max({ {age=15}, {age=12}, {age=19} }, function(p) return p.age end) 
+        _.max({ {age=15}, {age=12}, {age=19} }, function(p) return p.age end)
         => {age=19}
 
-    - name: 
+    - name:
         min
-      params: 
+      params:
         iter, [func]
       description: |
         Returns the item with the smallest value. If a func is provided it will be used on each value to generate the criterion by which the value is ranked.
       example: |
-        _.max({1,2,3,4}) 
+        _.max({1,2,3,4})
         => 1
-        _.max({ {age=15}, {age=12}, {age=19} }, function(p) return p.age end) 
+        _.max({ {age=15}, {age=12}, {age=19} }, function(p) return p.age end)
         => {age=12}
 
-    - name: 
+    - name:
         include
-      params: 
+      params:
         iter, value
       description: |
         Returns true if the list include's value. Uses the == operator.
@@ -124,9 +124,9 @@ iterator_functions:
         _.include({1,3,5}, function(i) return i%2 == 0 end)
         => false
 
-    - name: 
+    - name:
         detect
-      params: 
+      params:
         iter, func
       description: |
         Looks through a list returning the first element that matches a truth function. The function returns as soon as it finds an acceptable element.
@@ -136,93 +136,93 @@ iterator_functions:
         _.detect({1,2,3,4}, func(i) return i > 7 end)
         => nil
 
-    - name: 
+    - name:
         all
       aliases:
         - every
-      params: 
-        iter, [func]      
+      params:
+        iter, [func]
       description: |
         Returns true if func(item) returns true for all item in items.
       example: |
-        _.all({2,4,8}, function(i) return i%2 == 0 end)        
+        _.all({2,4,8}, function(i) return i%2 == 0 end)
         => true
-        _.all({1,2,3,4}, function(i) return i%2 == 0 end)        
+        _.all({1,2,3,4}, function(i) return i%2 == 0 end)
         => false
 
-    - name: 
+    - name:
         any
       aliases:
         - some
-      params: 
+      params:
         iter, [func]
       description: |
         Returns true if func(item) returns true for any item in items.
       example: |
-        _.any({1,2,3,4}, function(i) return i%2 == 0 end)        
+        _.any({1,2,3,4}, function(i) return i%2 == 0 end)
         => true
-        _.any({1,3,5}, function(i) return i%2 == 0 end)        
+        _.any({1,3,5}, function(i) return i%2 == 0 end)
         => false
 
-    - name: 
+    - name:
         to_array
-      params: 
+      params:
         iter
       description:
         Collects all values into a new array.
       example: |
-        _.to_array(string.gmatch("dog cat goat", "%S+")) 
+        _.to_array(string.gmatch("dog cat goat", "%S+"))
         => { "dog", "cat", "goat" }
 
-    - name: 
+    - name:
         sort
-      params: 
+      params:
         iter, [comparison_func]
       description:
         Returns an array with all elements sorted by the comparison function, by default it uses the < operator. If an array
         is passed in it will sort the elements in place and not create a new array.
       example: |
-        _.sort({ 3, 1, 2}) 
+        _.sort({ 3, 1, 2})
         => { 1, 2, 3 }
 
-    - name: 
+    - name:
         reverse
-      params: 
+      params:
         iter, [comparison_func]
       description:
         Iterates over all the items and returns a new array with the items in reverse order.
       example: |
-        _.reverse({ 1, 2, 3}) 
+        _.reverse({ 1, 2, 3})
         => { 3, 2, 1 }
 
 array_functions:
   pretty: Array Functions
   functions:
-    - name:      
+    - name:
         flatten
       params:
         array
       description:
         Flattens a nested array (the nesting can be to any depth).
       example: |
-        _.flatten({1, {2}, {3, {{{4}}}}}) 
+        _.flatten({1, {2}, {3, {{{4}}}}})
         => { 1, 2, 3, 4 }
 
-    - name:      
+    - name:
         first
       aliases:
         - head
       params:
         array, [length]
       description:
-        Returns the first element of an array. Optionally it will return an array of the first n items.        
+        Returns the first element of an array. Optionally it will return an array of the first n items.
       example: |
-        _.first({1,2,3}) 
+        _.first({1,2,3})
         => 1
-        _.first({1,2,3}, 2) 
+        _.first({1,2,3}, 2)
         => {1,2,}
-        
-    - name:      
+
+    - name:
         rest
       aliases:
         - tail
@@ -231,9 +231,9 @@ array_functions:
       description:
         Returns an array of all items except the first. Optionally it will start at start_index.
       example: |
-        _.rest({1,2,3}) 
-        => {2,3} 
-        _.rest({1,2,3}, 2) 
+        _.rest({1,2,3})
+        => {2,3}
+        _.rest({1,2,3}, 2)
         => {3}
 
     - name:
@@ -243,7 +243,7 @@ array_functions:
       description:
         Returns a section of an array starting with start_index of length items length.
       example: |
-        _.slice({ 1, 2, 3, 4, 5 }, 2, 3) 
+        _.slice({ 1, 2, 3, 4, 5 }, 2, 3)
         => { 2, 3, 4 }
 
     - name:
@@ -285,8 +285,8 @@ array_functions:
       example: |
         _.push({1,2,3}, 4)
         => {4,1,2,3}
-              
-    - name:      
+
+    - name:
         join
       params:
         array
@@ -298,22 +298,32 @@ array_functions:
         _.join({'c','a','t'}, '/')
         => "c/a/t"
 
+    - name:
+        zip
+      params:
+        array
+      description:
+        Returns an array where the nth item is an array containing the nth items of the arguments.
+      example: |
+        _.zip({1,2,3}, {3,4,5})
+        => {{1,3}, {2,4}, {3,5}}
+
 table_functions:
   pretty: Table Functions
-  functions:    
-    - name: 
+  functions:
+    - name:
         extend
-      params: 
+      params:
         destination, source
       description:
         Copy all of the properties in the source object over to the destination object.
       example: |
-        _.extend({ name = 'moe' }, { age = 50 }) 
+        _.extend({ name = 'moe' }, { age = 50 })
         => { name = 'moe', age = 50 }
 
-    - name: 
+    - name:
         keys
-      params: 
+      params:
         object
       description: |
         Returns an array of all the property names in a table. (Note: order is not defined)
@@ -321,9 +331,9 @@ table_functions:
         _.keys { name = "John", age = 25 }
         => { "name", "age" }
 
-    - name: 
+    - name:
         values
-      params: 
+      params:
         object
       description: |
         Returns an array of all the property values in a table. (Note: order is not defined)
@@ -331,17 +341,17 @@ table_functions:
         _.values { name = "John", age = 25 }
         => { "John", 25 }
 
-    - name: 
+    - name:
         is_empty
-      params: 
+      params:
         object
       description:
         Returns true if object contains no values.
       example: |
-        _.is_empty({}) 
-        => true 
-        -.is_empty({ name = "moe" }) 
-        => false      
+        _.is_empty({})
+        => true
+        -.is_empty({ name = "moe" })
+        => false
 function_functions:
   pretty: Function Functions
   functions:
@@ -358,74 +368,74 @@ function_functions:
         => {"a","b"}
         g("c")
         => {"a","c"}
-    - name: 
+    - name:
         wrap
-      params: 
+      params:
         func, wrapper
       description:
         Wraps the first function inside of the wrapper function, passing it as the first argument. This allows the wrapper to execute code before and after the function runs, adjust the arguments, and execute it conditionally.
       example: |
-        hello = function(name) 
-          return "hello: "..name 
-        end 
-        hello = _.wrap(hello, function(func, ...) 
-          return "before, "..func(...)..", after" 
-        end) 
-        hello('moe') 
+        hello = function(name)
+          return "hello: "..name
+        end
+        hello = _.wrap(hello, function(func, ...)
+          return "before, "..func(...)..", after"
+        end)
+        hello('moe')
         => before, hello: moe, after
-    - name: 
+    - name:
         compose
-      params: 
+      params:
         func1, func2, [...]
       description:
         Returns the composition of a list of functions, where each function consumes the return value of the function that follows. In math terms, composing the functions f(), g(), and h() produces f(g(h())).
       example: |
-        greet = function(name) 
-          return "hi: "..name 
-        end 
-        exclaim = function(statement) 
-          return statement.."!" 
-        end 
-        welcome = _.compose(print, greet, exclaim) 
-        welcome('moe') 
+        greet = function(name)
+          return "hi: "..name
+        end
+        exclaim = function(statement)
+          return statement.."!"
+        end
+        welcome = _.compose(print, greet, exclaim)
+        welcome('moe')
         => hi: moe!
 utility_functions:
   pretty: Utility Functions
-  functions:    
-    - name: 
+  functions:
+    - name:
         functions
       description:
         Returns a list of function names in this library.
       example: |
-        _.functions() 
+        _.functions()
         => { 'each', 'map', 'reduce', ... }
 
-    - name: 
+    - name:
         identity
       params:
         v
       description:
         Identity function, simply returns whatever is passed in. This function looks useless, but is used within Underscore as a default function.
-      example: |  
-        _.identity("foo") 
+      example: |
+        _.identity("foo")
         => "foo"
 
-    - name: 
+    - name:
         iter
       description:
         Creates an iterator function over an array.
-      example: |  
+      example: |
         for i in _.iter({1,2,3}) do
           print(i)
         end
 
-    - name: 
+    - name:
         range
       params:
         start_or_length, [end], [step]
       description:
         Iterates over a range of integers
-      example: |  
+      example: |
         _.range(5,10):to_array()
         => { 5,6,7,8,9,10 }
         _.range(10):to_array()
@@ -435,15 +445,15 @@ utility_functions:
         _.range(10,2,-2):to_array()
         => { 10,8,6,4,2 }
 
-    - name: 
+    - name:
         is_equal
       params:
         o1,o2,[ignore_mt]
       description:
-        Performs an optimized deep comparison between the two objects, to determine 
+        Performs an optimized deep comparison between the two objects, to determine
         if they should be considered equal. By default it uses the _eql metamethod if it
         is present.
-      example: |  
+      example: |
         _.is_equal({1,2,3},{1,2,3})
         => true
         _.is_equal({a=1,b=2},{a=1,b=2})
@@ -453,8 +463,8 @@ utility_functions:
 
 chaining_functions:
   pretty: Chaining Functions
-  functions:    
-    - name: 
+  functions:
+    - name:
         chain
       description:
         Puts underscore into chaining mode.
@@ -462,10 +472,10 @@ chaining_functions:
         _.({1,2,3,4}):chain():map(function(i) return i+1 end):select(function(i) i%2 == 0 end):value()
         => { 2,4 }
 
-    - name: 
+    - name:
         value
       description:
         Stops chaining and returns the current value.
-      example: |  
+      example: |
         _.({1,2,3,4}):chain():map(function(i) return i+1 end):select(function(i) i%2 == 0 end):value()
         => { 2,4 }
